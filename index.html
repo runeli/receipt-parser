@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt OCR Parser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <h3>Drop your receipt image here</h3>
+                        <p>or click to browse files</p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3>Demo Receipts</h3>
+                <p class="demo-subtitle">Click on any sample receipt to test the receipt parser. Some are mine and others are AI generated.</p>
+                <div class="demo-grid" id="demoGrid">
+                    <div class="demo-card" data-image="demo-receipt-images/receipt1.jpg">
+                        <img src="demo-receipt-images/receipt1.jpg" alt="Demo Receipt 1">
+                        <span>Receipt 1</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt2.jpg">
+                        <img src="demo-receipt-images/receipt2.jpg" alt="Demo Receipt 2">
+                        <span>Receipt 2</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt3.jpg">
+                        <img src="demo-receipt-images/receipt3.jpg" alt="Demo Receipt 3">
+                        <span>Receipt 3</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt4.jpg">
+                        <img src="demo-receipt-images/receipt4.jpg" alt="Demo Receipt 4">
+                        <span>Receipt 4</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt5.jpg">
+                        <img src="demo-receipt-images/receipt5.jpg" alt="Demo Receipt 5">
+                        <span>Receipt 5</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt6.png">
+                        <img src="demo-receipt-images/receipt6.png" alt="Demo Receipt 6">
+                        <span>Receipt 6</span>
+                    </div>
+                    <div class="demo-card" data-image="demo-receipt-images/receipt7.png">
+                        <img src="demo-receipt-images/receipt7.png" alt="Demo Receipt 7">
+                        <span>Receipt 7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3>Image Preview</h3>
+                <img id="imagePreview" alt="Receipt preview">
+                <button id="processBtn" class="process-btn">Process Receipt</button>
+            </div>
+
+            <div class="loading-section" id="loadingSection" style="display: none;">
+                <div class="spinner"></div>
+                <p id="loadingText">Processing receipt... This may take a moment.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">0%</p>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3>Extracted Information</h3>
+                <div class="json-output">
+                    <pre id="jsonDisplay"></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

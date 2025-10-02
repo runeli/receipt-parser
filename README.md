@@ -1,83 +1,81 @@
 # Receipt OCR Parser
 
-A TypeScript browser application that uses OCR to extract VAT, final price, and date information from Swedish and Finnish receipts.
+Browser-based OCR tool for extracting prices and dates from receipts. Built with TypeScript and Tesseract.js.
 
-## Features
+## What it does
 
-- 📄 **Image Upload**: Drag & drop or click to upload receipt images
-- 🔍 **OCR Processing**: Uses Tesseract.js for client-side optical character recognition
-- 🇸🇪🇫🇮 **Multi-language Support**: Recognizes Swedish (MOMS) and Finnish (ALV) VAT formats
-- 💰 **Price Extraction**: Automatically finds the final total amount
-- 📅 **Date Recognition**: Extracts receipt dates in various formats
-- 🎨 **Modern UI**: Beautiful, responsive design with real-time processing feedback
-- 📋 **JSON Output**: Structured data output with copy-to-clipboard functionality
+- Drag & drop receipt images or upload from filesystem
+- Extracts final price and receipt date
+- Returns structured JSON output
+- Everything runs client-side (no server needed)
 
-## Supported VAT Formats
+## Quick start
 
-- **Finnish**: ALV (Arvonlisävero)
-- **Swedish**: MOMS (Mervärdesskatt)
-- **Generic**: VAT
-
-## Supported Date Formats
-
-- DD.MM.YYYY / DD/MM/YYYY
-- DD-MM-YYYY
-- YYYY-MM-DD
-- Swedish month names (jan, feb, mar, etc.)
-- Finnish month names (tammi, helmi, maalis, etc.)
-
-## Usage
-
-1. **Open the Application**: Open `index.html` in a modern web browser
-2. **Upload Image**:
-   - Drag and drop a receipt image onto the upload area, or
-   - Click the upload area to browse and select an image file
-3. **Process Receipt**: Click the "Process Receipt" button
-4. **View Results**: The extracted information will be displayed in cards and as JSON
-
-## Technical Details
-
-- **Frontend-only**: No backend required, all processing happens in the browser
-- **OCR Engine**: Tesseract.js v5 with English, Swedish, and Finnish language support
-- **Languages**: Pure TypeScript compiled to ES2018
-- **Dependencies**: Only Tesseract.js (loaded via CDN)
-
-## File Structure
-
+```bash
+npm install
+npm run build
+npm run serve
 ```
-ocr/
-├── index.html          # Main HTML file
-├── styles.css          # Styling and responsive design
-├── app.ts             # TypeScript source code
-├── app.js             # Compiled JavaScript
-├── package.json       # Project configuration
-├── tsconfig.json      # TypeScript configuration
-└── README.md          # This file
+
+Then open http://localhost:8000
+
+Or just open `index.html` directly in a browser.
+
+## How to use
+
+1. Drop a receipt image on the page (or click to upload)
+2. Click "Process Receipt"
+3. Wait for OCR to finish (takes ~5-15 seconds)
+4. Get JSON with extracted data
+
+## Docker
+
+```bash
+npm run docker:compose:up
 ```
+
+See [DOCKER.md](DOCKER.md) for details.
+
+## Tech
+
+- TypeScript (vanilla, no frameworks)
+- Tesseract.js v5
+- Tesseract loaded from CDN
 
 ## Development
 
-To modify the application:
+Auto-rebuild on changes:
 
-1. Edit `app.ts` for functionality changes
-2. Edit `styles.css` for styling changes
-3. Compile TypeScript: `tsc app.ts --target es2018 --lib es2018,dom --outDir . --strict`
-4. Open `index.html` in a browser to test
+```bash
+npm run watch
+```
 
-## Browser Compatibility
+Or build manually:
 
-- Chrome/Edge 80+
-- Firefox 75+
-- Safari 13+
+```bash
+npm run build
+```
 
-## Known Limitations
+## Testing
 
-- OCR accuracy depends on image quality and text clarity
-- Processing time varies based on image size and complexity
-- Best results with high-contrast, well-lit receipt images
-- Currently optimized for Swedish and Finnish receipt formats
+Run automated tests on all 7 demo receipts:
+
+```bash
+npm test
+```
+
+Then open http://localhost:8000/test-receipts.html
+
+See [TESTING.md](TESTING.md) for ground truth values.
+
+## Known issues
+
+- OCR is slow on big images (10-20 seconds sometimes)
+- Accuracy varies wildly depending on photo quality
+- Sometimes grabs the wrong number as the total
+- Works better with Finnish receipts than Swedish (more training data in Tesseract)
+- Blurry or dark photos usually fail
 
 ## Privacy
 
-All processing happens locally in your browser. No images or data are sent to external servers.
-# receipt-parser
+Everything runs in your browser. No data sent anywhere.

@@ -1,0 +1,34 @@
+{
+  "name": "receipt-ocr-parser",
+  "version": "1.0.0",
+  "description": "A TypeScript browser app for parsing VAT, price, and date from Swedish/Finnish receipts using OCR",
+  "main": "index.html",
+  "scripts": {
+    "build": "tsc app.ts --target es2018 --lib es2018,dom --outDir . --strict",
+    "watch": "tsc app.ts --target es2018 --lib es2018,dom --outDir . --strict --watch",
+    "serve": "python3 -m http.server 8000 || python -m http.server 8000",
+    "dev": "npm run build && npm run serve",
+    "test": "npm run build && echo '\n✅ Build successful. Open http://localhost:8000/test-receipts.html to run tests\n' && npm run serve",
+    "docker:build": "docker build -t receipt-ocr-parser .",
+    "docker:run": "docker run -d -p 8080:80 --name receipt-ocr-parser receipt-ocr-parser",
+    "docker:stop": "docker stop receipt-ocr-parser && docker rm receipt-ocr-parser",
+    "docker:compose:up": "docker-compose up -d",
+    "docker:compose:down": "docker-compose down",
+    "docker:compose:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "ocr",
+    "receipt",
+    "vat",
+    "typescript",
+    "tesseract"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "tesseract.js": "^5.0.0"
+  }
+}

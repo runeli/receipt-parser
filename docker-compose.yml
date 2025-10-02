@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  ocr-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: receipt-ocr-parser
+    ports:
+      - "3002:80"
+    restart: unless-stopped
+    labels:
+      - "app=receipt-ocr-parser"
+      - "version=1.0.0"
